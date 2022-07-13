@@ -1,0 +1,26 @@
+version: '3'
+services:
+	my-app:
+		image: XXXX.amazonaws.com/my-app:1.0
+		ports:
+			-3000:3000
+	mongodb:
+		image: mongo
+		ports:
+			-27017:27017
+		volumes:
+			- db-data:/data/db
+		environments:
+			- MONGO_INITDB_ROOT_USERNAME=admin
+			- MANGO_INITDB_ROOT_PASSWORD=secret
+	mongo-express:
+		image: mongo-epress
+		ports:
+			- 8080:8081
+		environments:
+			- ME_CONFIG_MONGODB_ADMINUSER=admin
+			- ME_CONFIG_MONGODB_ADMINUSER=secret
+			- ME_CONFIG_MONGODB_SERVER=mongodb
+	volumes:
+		db-data:
+			driver: local
