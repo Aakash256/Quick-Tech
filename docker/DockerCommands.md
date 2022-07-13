@@ -84,4 +84,4 @@ docker run -d -v /data/db (Anonomous Volumes)
 docker run -d -v name:/data/db (Named volumes) - Mostly Used  
 
 # Docker Compose File - mongo.yaml
-https://github.com/Aakash256/Quick-Tech/blob/main/mongo.yaml
+https://github.com/Aakash256/Quick-Tech/blob/main/docker/mongo.yaml
