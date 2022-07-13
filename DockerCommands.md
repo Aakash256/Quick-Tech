@@ -71,8 +71,42 @@ docker run my-app:1.0
 docker rm container_id
 docker rmi image_id
 
+# Private Repository or Docker Registry
+- Can be created on AWS (ECR - Elastic Contain Registry)
+- login to docker 
+- build image (Command can be found in AWS)
+- Tag the image (Command can be found in AWS)
+- push image to Docker (Command can be found in AWS)
 
+# Host Volumes (-v host_path:doker_path)
+docker run -d -v /home/mount/data:/data/db
+docker run -d -v /data/db (Anonomous Volumes)
+docker run -d -v name:/data/db (Named volumes) - Mostly Used
 
-
-
-
+# Docker Compose File - mongo.yaml
+version: '3'
+services:
+	my-app:
+		image: XXXX.amazonaws.com/my-app:1.0
+		ports:
+			-3000:3000
+	mongodb:
+		image: mongo
+		ports:
+			-27017:27017
+		volumes:
+			- db-data:/data/db
+		environments:
+			- MONGO_INITDB_ROOT_USERNAME=admin
+			- MANGO_INITDB_ROOT_PASSWORD=secret
+	mongo-express:
+		image: mongo-epress
+		ports:
+			- 8080:8081
+		environments:
+			- ME_CONFIG_MONGODB_ADMINUSER=admin
+			- ME_CONFIG_MONGODB_ADMINUSER=secret
+			- ME_CONFIG_MONGODB_SERVER=mongodb
+	volumes:
+		db-data:
+			driver: local
