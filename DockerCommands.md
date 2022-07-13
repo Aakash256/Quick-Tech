@@ -28,7 +28,7 @@ docker run -p6000:6379 -d redis
 # lists all the images which you have in local
 docker images ()
 
-#DEBUG
+# DEBUG
 
 # Prints all the logs which container is logging
 docker logs container_id/names
@@ -40,36 +40,36 @@ docker run -d -p6001:6379 --name redis-older redis:4.0
 docker exec -it container_id/names /bin/bash or /bin/sh (All containers does not support bash)
 exit
 
-#Isolated Docker Network
-docker network ls
+# Isolated Docker Network
+docker network ls  
 docker network create network_name
 
 
 # Real World docker example
-docker pull mongo
-docker pull mongo-express
-docker network create mongo-network
-docker run -p 27017:27017 -d -e MONGO_INITDB_ROOT_USERNAME=admin -e MANGO_INITDB_ROOT_PASSWORD=secret --name mongodb --net mongo-network mongo 
-docker run -p 8081:8081 -e ME_CONFIG_MONGODB_ADMINUSER=admin -e ME_CONFIG_MONGODB_ADMINPASSWORD=secret --net mongo-network --name mongo-express -e ME_CONFIG_MONGODB_SERVER=mongodb mongo-express
-Create a database using mongo-express UI
+docker pull mongo  
+docker pull mongo-express  
+docker network create mongo-network  
+docker run -p 27017:27017 -d -e MONGO_INITDB_ROOT_USERNAME=admin -e MANGO_INITDB_ROOT_PASSWORD=secret --name mongodb --net mongo-network mongo  
+docker run -p 8081:8081 -e ME_CONFIG_MONGODB_ADMINUSER=admin -e ME_CONFIG_MONGODB_ADMINPASSWORD=secret --net mongo-network --name mongo-express -e  ME_CONFIG_MONGODB_SERVER=mongodb mongo-express  
+Create a database using mongo-express UI  
 
 # Docker Compose
-docker-compose -f mongo.yaml up
-docker-compose -f mongo.yaml down
+docker-compose -f mongo.yaml up  
+docker-compose -f mongo.yaml down  
 
 # Docker File (A blueprint to create docker images)
-FROM node
-RUN mkdir -p /home/app
-COPY ./app /home/app
-CMD ["node","server.js"]
+FROM node  
+RUN mkdir -p /home/app  
+COPY ./app /home/app  
+CMD ["node","server.js"]  
 
 # Build image from Docker File
-docker build -t my-app:1.0 .
-docker run my-app:1.0
+docker build -t my-app:1.0 .  
+docker run my-app:1.0  
 
 # Remove Docker Container and Docker Image
-docker rm container_id
-docker rmi image_id
+docker rm container_id  
+docker rmi image_id  
 
 # Private Repository or Docker Registry
 - Can be created on AWS (ECR - Elastic Contain Registry)
@@ -79,9 +79,9 @@ docker rmi image_id
 - push image to Docker (Command can be found in AWS)
 
 # Host Volumes (-v host_path:doker_path)
-docker run -d -v /home/mount/data:/data/db
-docker run -d -v /data/db (Anonomous Volumes)
-docker run -d -v name:/data/db (Named volumes) - Mostly Used
+docker run -d -v /home/mount/data:/data/db  
+docker run -d -v /data/db (Anonomous Volumes)  
+docker run -d -v name:/data/db (Named volumes) - Mostly Used  
 
 # Docker Compose File - mongo.yaml
 version: '3'
